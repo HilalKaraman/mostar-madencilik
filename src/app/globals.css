@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  /* Palette from .github/copilot-instructions.md */
+  --alizarin-crimson: #e12819;
+  --alizarin-crimson-rgb: 225,40,25;
+  --tuna: #303442;
+  --tuna-rgb: 48,52,66;
+  --anzac: #deb154;
+  --anzac-rgb: 222,177,84;
+  --donkey-brown: #a18f80;
+  --corn: #ecb207;
+  --corn-rgb: 236,178,7;
+  --dallas: #664e20;
+  --pampas: #f3efea;
+  --pampas-rgb: 243,239,234;
+  --crail: #c24b40;
+  --text-100: #f7f7f7;
+  --text-90: #d7d7d7;
+  --text-80: #cfcfcf;
+  --text-70: #d0d0d0;
+  --text-60: #bdbdbd;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.dark body {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+/* Hero background fallback when image not present */
+.hero-fallback {
+  background: linear-gradient(180deg, #06121a 0%, #071722 100%);
+}
+
+/* main padding removed so hero can be full-bleed under fixed navbar */
+main { padding-top: 0; }
+
+/* Theme utility classes using the project's palette */
+.bg-corn { background-color: var(--corn); }
+.text-pampas { color: var(--pampas); }
+.text-100 { color: var(--text-100); }
+.text-90 { color: var(--text-90); }
+.text-80 { color: var(--text-80); }
+.text-70 { color: var(--text-70); }
+.text-60 { color: var(--text-60); }
+.text-tuna { color: var(--tuna); }
+.hover-text-corn:hover { color: var(--corn); }
+.bg-tuna-trans { background-color: rgba(var(--tuna-rgb), 0.5); }
+.border-tuna-6 { border-color: rgba(var(--pampas-rgb), 0.06); }
+/* subtle card background */
+.bg-card { background-color: rgba(255,255,255,0.04); }
+
+/* Additional palette utilities */
+.text-corn { color: var(--corn); }
+.bg-pampas { background-color: var(--pampas); }
+.bg-pampas-90 { background-color: rgba(var(--pampas-rgb), 0.9); }
+.text-pampas-900 { color: var(--pampas); }
+.bg-alizarin-crimson { background-color: var(--alizarin-crimson); }
+.text-alizarin-crimson { color: var(--alizarin-crimson); }
+.bg-crail { background-color: var(--crail); }
+.text-dallas { color: var(--dallas); }
+.text-tuna-90 { color: rgba(var(--tuna-rgb), 0.9); }
+
+/* dark backgrounds */
+.dark-bg-900 { background-color: #0b0b0b; }
+
+/* Ensure contact section has space for decorative image */
+#iletisim { padding-bottom: 5rem; }
