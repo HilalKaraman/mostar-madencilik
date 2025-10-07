@@ -35,7 +35,8 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto bg-tuna-trans backdrop-blur-md rounded-xl border border-tuna-6 py-3 px-4 flex items-center justify-between gap-4 shadow-sm pointer-events-auto">
           <Link href="/" className="flex items-center gap-3">
               <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden flex-shrink-0 bg-card ring-1 ring-white/10">
-              <Image src="/logo.jpg" alt="Mostar Madencilik" fill className="object-cover w-full h-full" priority />
+              <Image src="/logo.png" alt="Mostar Madencilik" fill className="object-cover w-full h-full" priority />
+              <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[rgba(236,178,7,0.2)] to-transparent" aria-hidden="true" />
             </div>
             <span className="hidden sm:inline-block text-sm font-semibold tracking-tight text-100">Mostar Madencilik</span>
           </Link>
@@ -75,8 +76,9 @@ export default function Navbar() {
               <div className="w-64 bg-pampas-90 dark:dark-bg-900 p-6 shadow-xl">
                 <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="relative w-9 h-9 rounded-md overflow-hidden bg-card">
-                  <Image src="/logo.jpg" alt="Mostar" fill className="object-cover w-full h-full" />
+                <div className="relative w-9 h-9 rounded-md overflow-hidden bg-card ring-1 ring-white/10">
+                  <Image src="/logo.png" alt="Mostar" fill className="object-cover w-full h-full" />
+                  <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[rgba(236,178,7,0.2)] to-transparent" aria-hidden="true" />
                 </div>
                 <div className="text-sm font-semibold">Mostar</div>
               </div>

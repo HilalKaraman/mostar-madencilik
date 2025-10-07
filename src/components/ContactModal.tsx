@@ -58,6 +58,7 @@ export default function ContactModal({ open, onClose }: { open: boolean; onClose
               </header>
 
               <form onSubmit={handleSubmit} className="grid gap-3">
+                <label htmlFor="label">Bizimle iletişime geçiniz</label>
                 <input 
                   name="name" 
                   required 
