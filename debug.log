@@ -1,0 +1,4 @@
+[1010/143513.803:ERROR:registration_protocol_win.cc(108)] CreateFile: Sistem belirtilen dosyayı bulamıyor. (0x2)
+[1010/143514.000:ERROR:registration_protocol_win.cc(108)] CreateFile: Sistem belirtilen dosyayı bulamıyor. (0x2)
+[1010/143519.197:ERROR:registration_protocol_win.cc(108)] CreateFile: Sistem belirtilen dosyayı bulamıyor. (0x2)
+[1010/143527.934:ERROR:registration_protocol_win.cc(108)] CreateFile: Sistem belirtilen dosyayı bulamıyor. (0x2)

@@ -4,67 +4,255 @@ import { LuArrowRight, LuTruck, LuHardHat, LuShield, LuClock } from "react-icons
 import { FaCheckCircle } from "react-icons/fa"
 import Image from "next/image"
 import Hero from "../components/Hero"
-import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
+import Navbar from "../components/Navbar"
+import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { useRef, useEffect } from "react"
+
+// Animated Counter Component
+function AnimatedCounter({ value, duration = 2 }: { value: number; duration?: number }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const motionValue = useMotionValue(0)
+  const springValue = useSpring(motionValue, { duration: duration * 1000 })
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -100px 0px" })
+
+  useEffect(() => {
+    if (isInView) {
+      motionValue.set(value)
+    }
+  }, [motionValue, isInView, value])
+
+  useEffect(() => {
+    springValue.on("change", (latest) => {
+      if (ref.current) {
+        ref.current.textContent = Math.floor(latest).toString()
+      }
+    })
+  }, [springValue])
+
+  return <span ref={ref}>0</span>
+}
 
 export default function Home() {
-  const [isDark, setIsDark] = useState(false)
 
-  useEffect(() => {
-    const saved = typeof window !== 'undefined' ? localStorage.getItem("theme") : null
-    if (saved) {
-      setIsDark(saved === "dark")
-      document.documentElement.classList.toggle("dark", saved === "dark")
-    } else if (typeof window !== 'undefined') {
-      const prefers = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
-      setIsDark(prefers)
-      document.documentElement.classList.toggle("dark", prefers)
-    }
-  }, [])
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDark)
-    if (typeof window !== 'undefined') {
-      localStorage.setItem("theme", isDark ? "dark" : "light")
-    }
-  }, [isDark])
+  
   return (
     <div className="min-h-screen bg-background font-sans">
-      {/* Navigation */}
-      <nav className="fixed inset-x-0 top-4 z-50 px-4 pointer-events-none">
-        <div className="mx-auto max-w-7xl">
-          <motion.div initial={{ y: -16, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }} className="pointer-events-auto bg-tuna-trans backdrop-blur-md rounded-xl border border-tuna-6 shadow-sm">
-            <div className="flex h-16 items-center justify-between px-4">
-              <a href="#" className="flex items-center gap-3">
-                <span aria-label="Logo" className="logo-text-mask logo-gradient logo-drop block w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0" />
-                <span className="text-base sm:text-lg font-semibold text-100">Mostar Madencilik</span>
-              </a>
-              <div className="hidden items-center gap-6 md:flex text-sm">
-                <a href="#hizmetler" className="text-90 hover-text-corn transition-colors">Hizmetler</a>
-                <a href="#projeler" className="text-90 hover-text-corn transition-colors">Projeler</a>
-                <a href="#iletisim" className="text-90 hover-text-corn transition-colors">İletişim</a>
-              </div>
-              <div className="hidden sm:flex items-center gap-3">
-                <button onClick={() => setIsDark((s) => !s)} aria-label="Tema değiştir" className="inline-flex p-2 rounded-md bg-card">
-                  {isDark ? (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" /></svg>
-                  ) : (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 3v2M12 19v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42M6 12a6 6 0 0012 0 6 6 0 00-12 0z" /></svg>
-                  )}
-                </button>
-              </div>
-              <motion.a whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} href="#iletisim" className="sm:hidden inline-flex h-9 items-center rounded-md px-3 text-sm font-medium bg-corn text-tuna">
-                İletişim
-              </motion.a>
-            </div>
-          </motion.div>
-        </div>
-      </nav>
+      <Navbar />
 
       <Hero />
 
+      {/* Company Info Section with Paletli Kepçe */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-card">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Content */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              viewport={{ once: true, amount: 0.3 }} 
+              transition={{ duration: 0.6 }}
+            >
+              <div className="mb-6">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gunmetal dark:text-timberwolf mb-4">
+                  İşin Temeli <span className="text-gold-metallic">MOSTAR MADENCİLİK</span>
+                </h2>
+                <div className="w-20 h-1 bg-gold-metallic rounded-full mb-6"></div>
+              </div>
+              
+              <h3 className="text-xl sm:text-2xl font-semibold text-field-drab dark:text-timberwolf mb-6">
+                Hafriyat Çalışmalarınıza Kurumsal Çözüm Üretiyoruz
+              </h3>
+              
+              <p className="text-lg text-gunmetal dark:text-timberwolf leading-relaxed mb-8">
+                Firmamız yılların verdiği deneyim ve modern ekipman teknolojisiyle, 
+                hafriyat ve madencilik sektöründe güvenilir çözümler sunmaktadır. 
+                Üstlenmiş olduğu tüm projeleri başarı ile bitirip zamanından önce 
+                müşterilerimize teslim etmektedir.
+              </p>
+
+              {/* Stats */}
+              <div className="grid grid-cols-2 gap-6 mb-8">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }} 
+                  whileInView={{ opacity: 1, y: 0 }} 
+                  viewport={{ once: true }} 
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="text-center"
+                >
+                  <div className="text-3xl sm:text-4xl font-bold text-gold-metallic mb-2">
+                    <AnimatedCounter value={15} duration={2.5} />+
+                  </div>
+                  <div className="text-sm font-medium text-field-drab dark:text-timberwolf">Yıllık Deneyim</div>
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }} 
+                  whileInView={{ opacity: 1, y: 0 }} 
+                  viewport={{ once: true }} 
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="text-center"
+                >
+                  <div className="text-3xl sm:text-4xl font-bold text-gold-metallic mb-2">
+                    <AnimatedCounter value={100} duration={3} />+
+                  </div>
+                  <div className="text-sm font-medium text-field-drab dark:text-timberwolf">Tamamlanmış Proje</div>
+                </motion.div>
+              </div>
+
+              {/* Key Features */}
+              <div className="space-y-4">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }} 
+                  whileInView={{ opacity: 1, x: 0 }} 
+                  viewport={{ once: true }} 
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="w-2 h-2 bg-gold-metallic rounded-full"></div>
+                  <span className="text-gunmetal dark:text-timberwolf font-medium">Deneyim ve Uzmanlık</span>
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }} 
+                  whileInView={{ opacity: 1, x: 0 }} 
+                  viewport={{ once: true }} 
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="w-2 h-2 bg-gold-metallic rounded-full"></div>
+                  <span className="text-gunmetal dark:text-timberwolf font-medium">Kalite ve Güvenilirlik</span>
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }} 
+                  whileInView={{ opacity: 1, x: 0 }} 
+                  viewport={{ once: true }} 
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="w-2 h-2 bg-gold-metallic rounded-full"></div>
+                  <span className="text-gunmetal dark:text-timberwolf font-medium">Modern Teknolojik Altyapı</span>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            {/* Right Image */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              viewport={{ once: true, amount: 0.3 }} 
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative"
+            >
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9, rotateY: -15 }} 
+                whileInView={{ opacity: 1, scale: 1, rotateY: 0 }} 
+                viewport={{ once: true, amount: 0.3 }} 
+                transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                whileHover={{ scale: 1.02, rotateY: 2 }}
+                className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                <motion.div
+                  initial={{ scale: 1.1 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
+                  className="relative w-full h-full"
+                >
+                  <Image
+                    src="/mostarPalet2.png"
+                    alt="Mostar Madencilik Paletli Kepçe"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                    priority
+                  />
+                </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-t from-gunmetal/20 via-transparent to-transparent"></div>
+                
+                {/* Animated overlay effect */}
+                <motion.div
+                  initial={{ opacity: 0, x: "-100%" }}
+                  whileInView={{ opacity: [0, 0.3, 0], x: ["100%", "100%", "200%"] }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 1.5, delay: 1, ease: "easeInOut" }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-gold-metallic/30 to-transparent"
+                />
+              </motion.div>
+              
+              {/* Floating Badge */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.5, rotate: -180 }} 
+                whileInView={{ opacity: 1, scale: 1, rotate: 0 }} 
+                viewport={{ once: true, amount: 0.3 }} 
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 1.2, 
+                  type: "spring", 
+                  stiffness: 200, 
+                  damping: 15 
+                }}
+                whileHover={{ 
+                  scale: 1.1, 
+                  rotate: 5,
+                  transition: { duration: 0.2 }
+                }}
+                animate={{
+                  y: [0, -8, 0],
+                }}
+                transition={{
+                  y: {
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }
+                }}
+                className="absolute -bottom-6 -right-6 bg-gold-metallic text-gunmetal px-6 py-4 rounded-xl shadow-lg cursor-pointer"
+              >
+                <motion.div 
+                  className="text-center"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <motion.div 
+                    className="text-2xl font-bold"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 1.4 }}
+                  >
+                    7/24
+                  </motion.div>
+                  <motion.div 
+                    className="text-sm font-medium"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 1.6 }}
+                  >
+                    Hizmet
+                  </motion.div>
+                </motion.div>
+                
+                {/* Pulsing ring effect */}
+                <motion.div
+                  className="absolute inset-0 rounded-xl border-2 border-gold-metallic"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    opacity: [0.5, 0, 0.5],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Services Section */}
-      <section id="hizmetler" className="py-20 lg:py-32">
+      <section id="hizmetler" className="py-16 sm:py-20 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6 }} className="mx-auto max-w-2xl text-center">
             <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
@@ -76,7 +264,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} transition={{ staggerChildren: 0.08 }} className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} transition={{ staggerChildren: 0.08 }} className="mt-12 sm:mt-16 grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {[
             {
               icon: LuHardHat,
@@ -145,33 +333,33 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projeler" className="py-20 lg:py-32">
+      <section id="projeler" className="py-16 sm:py-20 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6 }} className="mx-auto max-w-2xl text-center">
             <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              Başarılı Projelerimiz
+               Projelerimiz
             </h2>
             <p className="mt-4 text-pretty text-lg text-muted-foreground">
-              Türkiye&#39;nin dört bir yanında gerçekleştirdiğimiz projelerle sektörde fark yaratıyoruz.
+              Türkiye&#39;de gerçekleştirdiğimiz projelerle sektörde fark yaratıyoruz.
             </p>
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} transition={{ staggerChildren: 0.08 }} className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} transition={{ staggerChildren: 0.08 }} className="mt-12 sm:mt-16 grid gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                title: "İstanbul Finans Merkezi",
-                category: "Ticari Proje",
-                image: "/modern-construction-site-istanbul.jpg",
+                title: "İnşaat Saha Projeleri",
+                category: "Hafriyat Projesi",
+                image: "/sahadaKamyon.jpg",
               },
               {
-                title: "Ankara Konut Kompleksi",
-                category: "Konut Projesi",
-                image: "/residential-construction-excavation.jpg",
+                title: "Servis Hizmetleri",
+                category: "Ulaşım",
+                image: "/sultanServis.jpg",
               },
               {
-                title: "İzmir Liman Genişletme",
-                category: "Altyapı Projesi",
-                image: "/port-construction-heavy-machinery.jpg",
+                title: "Kurumsal Projeler",
+                category: "Hafriyat Projesi",
+                image: "/kepce.webp",
               },
             ].map((project, index) => (
               <motion.div
@@ -200,7 +388,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="iletisim" className="py-20 lg:py-32">
+      <section id="iletisim" className="py-16 sm:py-20 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-3xl border border-border bg-card">
             <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[rgba(var(--corn-rgb),0.1)] via-transparent to-transparent" />
@@ -214,12 +402,12 @@ export default function Home() {
                 fiyat teklifi için hemen iletişime geçin.
               </p>
 
-              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} type="button" className="h-10 px-6 rounded-md text-base font-medium group bg-corn text-tuna hover-bg-corn-90">
+              <div className="mt-10 flex flex-col items-stretch sm:items-center justify-center gap-3 sm:gap-4 sm:flex-row">
+                <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} type="button" className="h-10 px-6 rounded-md text-base font-medium group bg-gold-metallic text-gunmetal hover:bg-field-drab w-full sm:w-auto">
                   İletişime Geçin
                   <LuArrowRight className="ml-2 h-4 w-4 inline-block align-middle transition-transform group-hover:translate-x-1" />
                 </motion.button>
-                <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} type="button" className="h-10 px-6 rounded-md text-base font-medium border border-border bg-transparent hover:bg-secondary">
+                <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} type="button" className="h-10 px-6 rounded-md text-base font-medium border border-border bg-transparent hover:bg-secondary w-full sm:w-auto">
                   +90 (555) 123 45 67
                 </motion.button>
               </div>
@@ -249,9 +437,9 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }} className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <div className="flex items-center gap-2">
-              <span className="relative w-6 h-6 rounded-md overflow-hidden ring-1 ring-white/10 bg-card flex-shrink-0">
+              <span className="relative w-6 h-6 rounded-md overflow-hidden ring-1 ring-field-drab/20 bg-card flex-shrink-0">
                 <Image src="/logo.jpg" alt="Mostar Madencilik" fill className="object-cover" />
-                <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[rgba(var(--corn-rgb),0.2)] to-transparent" aria-hidden="true" />
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[rgba(218,175,81,0.2)] to-transparent" aria-hidden="true" />
               </span>
               <span className="font-semibold">Mostar Madencilik</span>
             </div>

@@ -1,9 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  /* Palette from .github/copilot-instructions.md */
+  /* Light Mode - Yeni Renk Paleti */
+  --background: #D7D2CC;
+  --foreground: #2F3442;
+  
+  /* Yeni Ana Renk Paleti - GitHub'dan */
+  --gold-metallic: #DAAF51;
+  --gold-metallic-rgb: 218,175,81;
+  
+  --field-drab: #715D36;
+  --field-drab-rgb: 113,93,54;
+  
+  --gunmetal: #2F3442;
+  --gunmetal-rgb: 47,52,66;
+  
+  --timberwolf: #D7D2CC;
+  --timberwolf-rgb: 215,210,204;
+  
+  --gunmetal-2: #343946;
+  --gunmetal-2-rgb: 52,57,70;
+  
+  /* Eski paletler (geriye dönük uyumluluk için) */
+  --light-gray: #D7D2CC;
+  --light-gray-rgb: 215,210,204;
+  
+  --bright-yellow: #DAAF51;
+  --bright-yellow-rgb: 218,175,81;
+  
+  --golden-yellow: #DAAF51;
+  --golden-yellow-rgb: 218,175,81;
+  
+  --dark-gold: #715D36;
+  --dark-gold-rgb: 113,93,54;
+  
+  --amber-yellow: #DAAF51;
+  --amber-yellow-rgb: 218,175,81;
+  
+  /* Eski paletler (geriye dönük uyumluluk için) */
   --alizarin-crimson: #e12819;
   --alizarin-crimson-rgb: 225,40,25;
   --tuna: #303442;
@@ -11,24 +45,73 @@
   --anzac: #deb154;
   --anzac-rgb: 222,177,84;
   --donkey-brown: #a18f80;
-  --corn: #ecb207;
-  --corn-rgb: 236,178,7;
+  --corn: #F2CE1B;
+  --corn-rgb: 242,206,27;
   --dallas: #664e20;
   --pampas: #f3efea;
   --pampas-rgb: 243,239,234;
   --crail: #c24b40;
-  --text-100: #f7f7f7;
-  --text-90: #d7d7d7;
-  --text-80: #cfcfcf;
-  --text-70: #d0d0d0;
-  --text-60: #bdbdbd;
+  
+  /* Light Mode Text Colors */
+  --text-100: #2F3442;
+  --text-90: #3f4552;
+  --text-80: #4f5662;
+  --text-70: #5f6772;
+  --text-60: #715D36;
+  --text-muted: #5f6772;
+  
+  /* Light Mode UI Colors */
+  --card-bg: #D7D2CC;
+  --card-bg-rgb: 215,210,204;
+  --border-color: #715D36;
+  --border-color-rgb: 113,93,54;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-roboto);
+}
+
+/* Dark Mode - Yeni Renk Paleti */
+.dark {
+  /* Ana Renkler */
+  --background: #2F3442;
+  --foreground: #D7D2CC;
+  
+  /* Dark Mode Palette - GitHub paletinden */
+  --dark-bg: #2F3442;
+  --dark-bg-rgb: 47,52,66;
+  
+  --gold-accent: #DAAF51;
+  --gold-accent-rgb: 218,175,81;
+  
+  --bronze-accent: #715D36;
+  --bronze-accent-rgb: 113,93,54;
+  
+  --dark-bronze: #343946;
+  --dark-bronze-rgb: 52,57,70;
+  
+  --light-text: #D7D2CC;
+  --light-text-rgb: 215,210,204;
+  
+  /* Text Colors */
+  --text-100: #D7D2CC;
+  --text-90: #c5c0ba;
+  --text-80: #b3aea8;
+  --text-70: #a19c96;
+  --text-60: #8f8a84;
+  --text-muted: #8f8a84;
+  
+  /* UI Colors */
+  --card-bg: #343946;
+  --card-bg-rgb: 52,57,70;
+  --border-color: rgba(215,210,204,0.15);
+  --border-color-rgb: 215,210,204;
+  
+  /* Vurgu Renkleri (yeni palet) */
+  --corn: #DAAF51;
+  --corn-rgb: 218,175,81;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,12 +125,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.dark body {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  font-family: var(--font-roboto), system-ui, -apple-system, sans-serif;
 }
 
 /* Hero background fallback when image not present */
@@ -58,8 +136,31 @@ body {
 /* main padding removed so hero can be full-bleed under fixed navbar */
 main { padding-top: 0; }
 
-/* Theme utility classes using the project's palette */
+/* Theme utility classes using the new palette */
 .bg-corn { background-color: var(--corn); }
+.text-corn { color: var(--corn); }
+
+/* Yeni renk paleti utility classes */
+.bg-gold-metallic { background-color: var(--gold-metallic); }
+.text-gold-metallic { color: var(--gold-metallic); }
+.bg-field-drab { background-color: var(--field-drab); }
+.text-field-drab { color: var(--field-drab); }
+.bg-gunmetal { background-color: var(--gunmetal); }
+.text-gunmetal { color: var(--gunmetal); }
+.bg-timberwolf { background-color: var(--timberwolf); }
+.text-timberwolf { color: var(--timberwolf); }
+.bg-gunmetal-2 { background-color: var(--gunmetal-2); }
+.text-gunmetal-2 { color: var(--gunmetal-2); }
+
+/* Eski paletler (geriye dönük uyumluluk için) */
+.bg-bright-yellow { background-color: var(--bright-yellow); }
+.text-bright-yellow { color: var(--bright-yellow); }
+.bg-golden-yellow { background-color: var(--golden-yellow); }
+.text-golden-yellow { color: var(--golden-yellow); }
+.bg-dark-gold { background-color: var(--dark-gold); }
+.text-dark-gold { color: var(--dark-gold); }
+.bg-amber-yellow { background-color: var(--amber-yellow); }
+.text-amber-yellow { color: var(--amber-yellow); }
 .text-pampas { color: var(--pampas); }
 .text-100 { color: var(--text-100); }
 .text-90 { color: var(--text-90); }
@@ -67,13 +168,62 @@ main { padding-top: 0; }
 .text-70 { color: var(--text-70); }
 .text-60 { color: var(--text-60); }
 .text-tuna { color: var(--tuna); }
+.text-muted-foreground { color: var(--text-muted); }
+
+/* Hover utilities */
 .hover-text-corn:hover { color: var(--corn); }
-.bg-tuna-trans { background-color: rgba(var(--tuna-rgb), 0.5); }
-.border-tuna-6 { border-color: rgba(var(--pampas-rgb), 0.06); }
-/* subtle card background */
-.bg-card { background-color: rgba(255,255,255,0.04); }
-/* hover helpers */
 .hover-bg-corn-90:hover { background-color: rgba(var(--corn-rgb), 0.9); }
+
+/* Background utilities */
+.bg-tuna-trans { background-color: rgba(var(--tuna-rgb), 0.5); }
+.bg-card { 
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+}
+.bg-pampas { background-color: var(--pampas); }
+.bg-pampas-90 { background-color: rgba(var(--pampas-rgb), 0.9); }
+.bg-background { background-color: var(--background); }
+
+/* Light mode specific card styling */
+:root:not(.dark) .bg-card {
+  background-color: var(--timberwolf);
+  border: 1px solid var(--field-drab);
+  box-shadow: 0 1px 3px rgba(47,52,66,0.1);
+}
+
+/* Dark mode specific card styling */
+.dark .bg-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* Border utilities */
+.border-tuna-6 { border-color: rgba(var(--border-color-rgb), 0.2); }
+.border-border { border-color: var(--border-color); }
+.bg-secondary { background-color: rgba(var(--card-bg-rgb), 0.5); }
+
+/* Additional palette utilities */
+.text-pampas-900 { color: var(--pampas); }
+.bg-alizarin-crimson { background-color: var(--alizarin-crimson); }
+.text-alizarin-crimson { color: var(--alizarin-crimson); }
+.bg-crail { background-color: var(--crail); }
+.text-dallas { color: var(--dallas); }
+.text-tuna-90 { color: rgba(var(--tuna-rgb), 0.9); }
+
+/* Dark Mode Specific Utilities */
+.dark .bg-dark-primary { background-color: var(--dark-bg); }
+.dark .text-gold-accent { color: var(--gold-accent); }
+.dark .bg-gold-accent { background-color: var(--gold-accent); }
+.dark .text-bronze-accent { color: var(--bronze-accent); }
+.dark .bg-bronze-accent { background-color: var(--bronze-accent); }
+.dark .text-dark-bronze { color: var(--dark-bronze); }
+.dark .bg-dark-bronze { background-color: var(--dark-bronze); }
+.dark .text-light-text { color: var(--light-text); }
+
+/* dark backgrounds */
+.dark-bg-900 { background-color: #0b0b0b; }
+.dark .dark-bg-900 { background-color: var(--dark-bg); }
 
 /* Logo text-only mask utility: uses luminance mask of the logo image */
 .logo-text-mask {
@@ -92,7 +242,7 @@ main { padding-top: 0; }
 
 /* Gradient fill and subtle animation for masked logo */
 .logo-gradient {
-  background-image: linear-gradient(90deg, var(--corn) 0%, #ffd877 50%, var(--corn) 100%);
+  background-image: linear-gradient(90deg, var(--golden-yellow) 0%, var(--amber-yellow) 50%, var(--golden-yellow) 100%);
   background-size: 200% 100%;
   animation: logo-sheen 8s linear infinite;
 }
@@ -103,22 +253,26 @@ main { padding-top: 0; }
 }
 
 .logo-drop {
-  filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25)) drop-shadow(0 1px 0 rgba(255,255,255,0.06));
+  filter: drop-shadow(0 6px 20px rgba(140,123,35,0.3)) drop-shadow(0 2px 8px rgba(242,206,27,0.2));
 }
 
-/* Additional palette utilities */
-.text-corn { color: var(--corn); }
-.bg-pampas { background-color: var(--pampas); }
-.bg-pampas-90 { background-color: rgba(var(--pampas-rgb), 0.9); }
-.text-pampas-900 { color: var(--pampas); }
-.bg-alizarin-crimson { background-color: var(--alizarin-crimson); }
-.text-alizarin-crimson { color: var(--alizarin-crimson); }
-.bg-crail { background-color: var(--crail); }
-.text-dallas { color: var(--dallas); }
-.text-tuna-90 { color: rgba(var(--tuna-rgb), 0.9); }
+/* Light mode logo styling */
+:root:not(.dark) .logo-gradient {
+  background-image: linear-gradient(90deg, var(--golden-yellow) 0%, var(--bright-yellow) 40%, var(--amber-yellow) 60%, var(--golden-yellow) 100%);
+}
 
-/* dark backgrounds */
-.dark-bg-900 { background-color: #0b0b0b; }
+:root:not(.dark) .logo-drop {
+  filter: drop-shadow(0 4px 12px rgba(140,123,35,0.25)) drop-shadow(0 1px 3px rgba(242,187,22,0.15));
+}
+
+/* Dark mode logo styling */
+.dark .logo-gradient {
+  background-image: linear-gradient(90deg, var(--gold-accent) 0%, var(--bronze-accent) 40%, var(--dark-bronze) 60%, var(--gold-accent) 100%);
+}
+
+.dark .logo-drop {
+  filter: drop-shadow(0 6px 20px rgba(217,181,74,0.4)) drop-shadow(0 2px 8px rgba(191,146,63,0.3));
+}
 
 /* Ensure contact section has space for decorative image */
 #iletisim { padding-bottom: 5rem; }

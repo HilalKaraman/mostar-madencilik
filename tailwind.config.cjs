@@ -6,6 +6,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			fontFamily: {
+				'sans': ['var(--font-roboto)', 'system-ui', '-apple-system', 'sans-serif'],
+			},
 			colors: {
 				'alizarin-crimson': '#e12819',
 				'tuna': '#303442',
