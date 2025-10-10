@@ -2,12 +2,33 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { fadeUp, staggerContainer, scaleOnHover } from "../lib/motion";
+import { fadeUp, staggerContainer } from "../lib/motion";
+
+const sentence = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 0.5,
+      staggerChildren: 0.04,
+    },
+  },
+};
+
+const letter = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
 
 export default function Hero() {
+  const text = "Güçlü, Güvenilir Hafriyat Taşımacılık ve Madencilik Hizmetleri";
+
   return (
-    <section className="relative min-h-[80vh] md:h-screen flex items-center">
-      <div className="absolute inset-0 bg-gradient-to-b from-timberwolf/80 to-timberwolf/70 dark:from-gunmetal/85 dark:to-gunmetal/80" />
+    <section className="relative min-h-[80vh] md:h-screen flex items-end justify-end text-right pb-20">
+      <div className="absolute inset-0 bg-black" />
       <div className="absolute inset-0">
         <Image 
           src="/mostarHero2.jpg" 
@@ -19,32 +40,45 @@ export default function Hero() {
           aria-hidden="true" 
         />
       </div>
-      <div className="absolute inset-0 bg-timberwolf/40 dark:bg-gunmetal/50" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(0,0,0,0.7))]"></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full px-6 pt-28 md:pt-32 lg:pt-36">
-        <motion.div variants={staggerContainer(0.08)} initial="hidden" animate="show" className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div>
-            <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-field-drab dark:text-timberwolf">
-              Mostar Madencilik — Güçlü, Güvenilir Hafriyat ve Madencilik Hizmetleri
-            </motion.h1>
-
-            <motion.p variants={fadeUp} className="mt-4 text-lg text-gunmetal dark:text-timberwolf max-w-lg">
-              Yüksek kapasiteli taşıma, kazı ve proje yönetimi ile saha çözümleri. Profesyonel ekip, modern ekipman ve güvenlik odaklı çalışma prensipleriyle projelerinize değer katıyoruz.
-            </motion.p>
-
-            <motion.div variants={fadeUp} className="mt-6 flex gap-4">
-              <motion.a {...scaleOnHover} href="#iletisim" className="rounded-md bg-gold-metallic dark:bg-gold-metallic text-gunmetal px-5 py-3 font-medium hover:bg-field-drab dark:hover:bg-field-drab transition-colors shadow-md">İletişime Geç</motion.a>
-            </motion.div>
-          </div>
-
-          <motion.div variants={fadeUp} className="flex items-center justify-center md:justify-end">
-            <div className="relative w-full max-w-xl">
-              {/* Text-only logo using mask; transparent background with gradient fill and glow */}
-              <span aria-label="Mostar Madencilik" className="logo-text-mask logo-gradient logo-drop mx-auto block w-[220px] h-[76px] sm:w-[320px] sm:h-[110px] md:w-[420px] md:h-[145px] lg:w-[600px] lg:h-[200px]" />
-            </div>
-          </motion.div>
-        </motion.div>
+      <div className="relative z-10 max-w-4xl w-full px-6">
+        <motion.h1
+          className="font-bold text-4xl md:text-2xl lg:text-6xl tracking-tighter leading-tight text-gray-300 drop-shadow-lg"
+          variants={sentence}
+          initial="hidden"
+          animate="visible"
+        >
+          {text.split("").map((char, index) => (
+            <motion.span key={char + "-" + index} variants={letter}>
+              {char}
+            </motion.span>
+          ))}
+        </motion.h1>
       </div>
+
+      {/* Scroll Down Mouse Icon */}
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        animate={{ y: [0, 8, 0] }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          repeatType: "loop",
+        }}
+      >
+        <div className="w-6 h-8 rounded-full border-2 border-gray-200 flex justify-center items-start p-1">
+          <motion.div
+            className="w-1 h-2 rounded-full bg-gray-200"
+            animate={{ y: [0, 10, 0], opacity: [1, 0, 1] }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: "loop",
+            }}
+          />
+        </div>
+      </motion.div>
     </section>
   );
 }

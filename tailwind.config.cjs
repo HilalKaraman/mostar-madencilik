@@ -10,6 +10,7 @@ module.exports = {
 				'sans': ['var(--font-roboto)', 'system-ui', '-apple-system', 'sans-serif'],
 			},
 			colors: {
+				'gold-metallic': '#DAAF51',
 				'alizarin-crimson': '#e12819',
 				'tuna': '#303442',
 				'anzac': '#deb154',

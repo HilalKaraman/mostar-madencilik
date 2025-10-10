@@ -33,16 +33,157 @@ function AnimatedCounter({ value, duration = 2 }: { value: number; duration?: nu
 }
 
 export default function Home() {
+  // JSON-LD Structured Data for SEO
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://mostarmadencilik.com.tr/#hizmetler",
+        "name": "Mostar Madencilik",
+        "url": "https://mostarmadencilik.com.tr",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://mostarmadencilik.com.tr/logo.png",
+          "width": 512,
+          "height": 512
+        },
+        "image": "https://mostarmadencilik.com.tr/logo.png",
+        "description": "Muğla ve çevre illerde 15+ yıllık deneyimle profesyonel hafriyat, kazı, nakliye ve madencilik hizmetleri.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Muğla",
+          "addressRegion": "Muğla",
+          "addressCountry": "TR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 37.2,
+          "longitude": 27.5
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+90-535-357-2549",
+          "contactType": "customer service",
+          "areaServed": "TR",
+          "availableLanguage": "Turkish"
+        },
+        "sameAs": [],
+        "areaServed": {
+          "@type": "GeoCircle",
+          "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "latitude": 37.2,
+            "longitude": 27.5
+          },
+          "geoRadius": "100000"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://mostarmadencilik.com.tr",
+        "url": "https://mostarmadencilik.com.tr",
+        "name": "Mostar Madencilik",
+        "description": "Profesyonel hafriyat ve madencilik hizmetleri",
+        "publisher": {
+          "@id": "https://mostarmadencilik.com.tr"
+        },
+        "inLanguage": "tr-TR"
+      },
+      {
+        "@type": "Service",
+        "serviceType": "Hafriyat ve Kazı Hizmetleri",
+        "provider": {
+          "@id": "https://mostarmadencilik.com.tr/#organization"
+        },
+        "areaServed": {
+          "@type": "State",
+          "name": "Muğla"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Hafriyat Hizmetleri",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Hafriyat & Kazı",
+                "description": "Yüksek kapasiteli ekskavatörlerle hassas kazı ve zemin hazırlığı"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Nakliye & Taşıma",
+                "description": "Geniş araç filomuzla kırma, taşıma ve malzeme yönetimi"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Ekipman Kiralama",
+                "description": "Kısa ve uzun dönemli ağır ekipman kiralama çözümleri"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://mostarmadencilik.com.tr/#localbusiness",
+        "name": "Mostar Madencilik",
+        "image": "https://mostarmadencilik.com.tr/logo.png",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Muğla",
+          "addressRegion": "Muğla",
+          "addressCountry": "TR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 37.2,
+          "longitude": 27.5
+        },
+        "url": "https://mostarmadencilik.com.tr",
+        "telephone": "+90-535-357-2549",
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      }
+    ]
+  };
 
   
   return (
     <div className="min-h-screen bg-background font-sans">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      
       <Navbar />
 
       <Hero />
 
+
       {/* Company Info Section with Paletli Kepçe */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-card">
+      <section aria-label="Şirket Hakkında" className="py-16 sm:py-20 lg:py-24 bg-card">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content */}
@@ -147,7 +288,7 @@ export default function Home() {
                 viewport={{ once: true, amount: 0.3 }} 
                 transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
                 whileHover={{ scale: 1.02, rotateY: 2 }}
-                className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl"
+                className="relative aspect-[4/3] rounded-2xl overflow-hidden"
                 style={{ transformStyle: "preserve-3d" }}
               >
                 <motion.div
@@ -181,15 +322,19 @@ export default function Home() {
               {/* Floating Badge */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.5, rotate: -180 }} 
-                whileInView={{ opacity: 1, scale: 1, rotate: 0 }} 
+                whileInView={{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  rotate: 0,
+                  transition: { 
+                    duration: 0.8, 
+                    delay: 1.2, 
+                    type: "spring", 
+                    stiffness: 200, 
+                    damping: 15 
+                  }
+                }} 
                 viewport={{ once: true, amount: 0.3 }} 
-                transition={{ 
-                  duration: 0.8, 
-                  delay: 1.2, 
-                  type: "spring", 
-                  stiffness: 200, 
-                  damping: 15 
-                }}
                 whileHover={{ 
                   scale: 1.1, 
                   rotate: 5,
@@ -199,11 +344,9 @@ export default function Home() {
                   y: [0, -8, 0],
                 }}
                 transition={{
-                  y: {
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
                 }}
                 className="absolute -bottom-6 -right-6 bg-gold-metallic text-gunmetal px-6 py-4 rounded-xl shadow-lg cursor-pointer"
               >
@@ -252,7 +395,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="hizmetler" className="py-16 sm:py-20 lg:py-32">
+      <section id="hizmetler" aria-label="Hizmetlerimiz" className="py-16 sm:py-20 lg:py-32 bg-card">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6 }} className="mx-auto max-w-2xl text-center">
             <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
@@ -310,10 +453,12 @@ export default function Home() {
                 variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
                 key={index}
                 className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all hover:border-[rgba(var(--corn-rgb),0.5)] hover:shadow-lg"
+                whileHover={{ scale: 1.05, y: -8 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[rgba(var(--corn-rgb),0.05)] to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
-                <service.icon className="h-10 w-10 text-corn" />
+                <service.icon className="h-10 w-10 text-gold-metallic" />
 
                 <h3 className="mt-4 text-xl font-semibold">{service.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
@@ -321,7 +466,7 @@ export default function Home() {
                 <ul className="mt-4 space-y-2">
                   {service.features.map((feature, i) => (
                     <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <FaCheckCircle className="h-4 w-4 text-corn" />
+                      <FaCheckCircle className="h-4 w-4 text-gold-metallic" />
                       {feature}
                     </li>
                   ))}
@@ -332,8 +477,9 @@ export default function Home() {
         </div>
       </section>
 
+
       {/* Projects Section */}
-      <section id="projeler" className="py-16 sm:py-20 lg:py-32">
+      <section id="projeler" aria-label="Projelerimiz" className="py-16 sm:py-20 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6 }} className="mx-auto max-w-2xl text-center">
             <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
@@ -347,7 +493,7 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} transition={{ staggerChildren: 0.08 }} className="mt-12 sm:mt-16 grid gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                title: "İnşaat Saha Projeleri",
+                title: "İnşaat Projeleri",
                 category: "Hafriyat Projesi",
                 image: "/sahadaKamyon.jpg",
               },
@@ -357,7 +503,7 @@ export default function Home() {
                 image: "/sultanServis.jpg",
               },
               {
-                title: "Kurumsal Projeler",
+                title: "Maden Projeleri",
                 category: "Hafriyat Projesi",
                 image: "/kepce.webp",
               },
@@ -378,7 +524,7 @@ export default function Home() {
                   />
                 </div>
                 <div className="p-6">
-                  <div className="text-sm text-corn">{project.category}</div>
+                  <div className="text-md font-bold text-gold-metallic">{project.category}</div>
                   <h3 className="mt-2 text-xl font-semibold">{project.title}</h3>
                 </div>
               </motion.div>
@@ -387,8 +533,9 @@ export default function Home() {
         </div>
       </section>
 
+
       {/* Contact Section */}
-      <section id="iletisim" className="py-16 sm:py-20 lg:py-32">
+      <section id="iletisim" aria-label="İletişim" className="py-16 sm:py-20 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-3xl border border-border bg-card">
             <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[rgba(var(--corn-rgb),0.1)] via-transparent to-transparent" />
@@ -408,7 +555,7 @@ export default function Home() {
                   <LuArrowRight className="ml-2 h-4 w-4 inline-block align-middle transition-transform group-hover:translate-x-1" />
                 </motion.button>
                 <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} type="button" className="h-10 px-6 rounded-md text-base font-medium border border-border bg-transparent hover:bg-secondary w-full sm:w-auto">
-                  +90 (555) 123 45 67
+                  +90 (535) 357 25 49
                 </motion.button>
               </div>
 
@@ -416,15 +563,15 @@ export default function Home() {
               <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} transition={{ staggerChildren: 0.08 }} className="mt-16 grid gap-8 border-t border-border pt-10 sm:grid-cols-3">
                 <motion.div variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
                   <div className="text-sm font-medium text-muted-foreground">E-posta</div>
-                  <div className="mt-1 text-foreground">info@temelkazi.com</div>
+                  <div className="mt-1 text-foreground">info@mastormadencilik.com.tr</div>
                 </motion.div>
                 <motion.div variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
                   <div className="text-sm font-medium text-muted-foreground">Telefon</div>
-                  <div className="mt-1 text-foreground">+90 (555) 123 45 67</div>
+                  <div className="mt-1 text-foreground">+90 (535) 357 25 49</div>
                 </motion.div>
                 <motion.div variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
                   <div className="text-sm font-medium text-muted-foreground">Adres</div>
-                  <div className="mt-1 text-foreground">Malatya, Türkiye</div>
+                  <div className="mt-1 text-foreground">Türkiye</div>
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -433,9 +580,117 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-12">
+      <footer aria-label="Site Footer" className="border-t border-border py-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }} className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          {/* Two Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
+            {/* Left: Map Section */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              viewport={{ once: true, amount: 0.3 }} 
+              transition={{ duration: 0.6 }}
+            >
+              <h3 className="text-xl font-semibold mb-4">Konumumuz</h3>
+              <div className="relative w-full h-64 sm:h-80 lg:h-[500px] rounded-2xl overflow-hidden border border-border shadow-xl">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d811875.2848837134!2d27.5!3d37.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bf7652e9c326e9%3A0xe8e1c6f71339b379!2zTXXEn2xh!5e0!3m2!1str!2str!4v1234567890"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Mostar Madencilik - Muğla Bölgesi"
+                />
+              </div>
+            </motion.div>
+
+            {/* Right: Contact Form */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              viewport={{ once: true, amount: 0.3 }} 
+              transition={{ duration: 0.6 }}
+            >
+              <h3 className="text-xl font-semibold mb-4">İletişim Formu</h3>
+              <form className="space-y-4" aria-label="İletişim Formu">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                    Ad Soyad <span className="text-red-500" aria-label="zorunlu alan">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    aria-required="true"
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-gold-metallic focus:border-transparent transition-all"
+                    placeholder="Adınız ve soyadınız"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                    E-posta <span className="text-red-500" aria-label="zorunlu alan">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    aria-required="true"
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-gold-metallic focus:border-transparent transition-all"
+                    placeholder="ornek@email.com"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                    Telefon <span className="text-red-500" aria-label="zorunlu alan">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    required
+                    aria-required="true"
+                    pattern="[0-9+\s\(\)\-]+"
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-gold-metallic focus:border-transparent transition-all"
+                    placeholder="+90 (5XX) XXX XX XX"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                    Mesajınız <span className="text-red-500" aria-label="zorunlu alan">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    required
+                    aria-required="true"
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-gold-metallic focus:border-transparent transition-all resize-none"
+                    placeholder="Projeniz hakkında bize bilgi verin..."
+                  />
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit"
+                  aria-label="İletişim formunu gönder"
+                  className="w-full px-6 py-3 rounded-lg text-base font-medium bg-gold-metallic text-gunmetal hover:bg-field-drab transition-colors"
+                >
+                  Gönder
+                </motion.button>
+              </form>
+            </motion.div>
+          </div>
+
+          {/* Bottom Copyright */}
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }} className="flex flex-col items-center justify-between gap-4 sm:flex-row pt-8 border-t border-border">
             <div className="flex items-center gap-2">
               <span className="relative w-6 h-6 rounded-md overflow-hidden ring-1 ring-field-drab/20 bg-card flex-shrink-0">
                 <Image src="/logo.jpg" alt="Mostar Madencilik" fill className="object-cover" />
