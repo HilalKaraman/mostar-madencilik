@@ -29,16 +29,19 @@ export default function Hero() {
   return (
     <section className="relative min-h-[80vh] md:h-screen flex items-end justify-end text-right pb-20">
       <div className="absolute inset-0 bg-black" />
-      <div className="absolute inset-0">
-        <Image 
-          src="/mostarHero2.jpg" 
-          alt="Mostar Madencilik" 
-          fill 
-          sizes="100vw" 
-          className="object-cover w-full h-full" 
-          priority 
-          aria-hidden="true" 
-        />
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="relative w-full h-full">
+          <Image 
+            src="/mostarHero2.jpg" 
+            alt="Mostar Madencilik" 
+            fill 
+            sizes="(max-width: 640px) 200px, (max-width: 768px) 489px, (max-width: 1024px) 697px, (max-width: 1280px) 1008px, (max-width: 1400px) 1161px, 1400px" 
+            className="object-cover object-left w-full h-full" 
+            priority 
+            aria-hidden="true"
+            quality={90}
+          />
+        </div>
       </div>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(0,0,0,0.7))]"></div>
 

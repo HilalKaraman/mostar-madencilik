@@ -72,9 +72,9 @@ export default function Navbar() {
                 initial="hidden"
                 animate="show"
                 className={`hidden md:flex items-center gap-6 font-medium transition-all duration-300 mr-8 ${scrolled ? "text-sm" : "text-base"}`}>
+                <motion.a variants={navItem} href="#hakkımızda" className={`font-bold hover:text-gold-metallic transition-colors ${scrolled ? "text-white" : "text-gray-300"}`}>Hakkımızda</motion.a>
                 <motion.a variants={navItem} href="#hizmetler" className={`font-bold hover:text-gold-metallic transition-colors ${scrolled ? "text-white" : "text-gray-300"}`}>Hizmetler</motion.a>
                 <motion.a variants={navItem} href="#projeler" className={`font-bold hover:text-gold-metallic transition-colors ${scrolled ? "text-white" : "text-gray-300"}`}>Projeler</motion.a>
-                <motion.a variants={navItem} href="#referanslar" className={`font-bold hover:text-gold-metallic transition-colors ${scrolled ? "text-white" : "text-gray-300"}`}>Referanslar</motion.a>
                 <motion.div variants={navItem}>
                   <motion.a href="#iletisim" className={`rounded-md bg-gold-metallic dark:bg-gold-metallic text-gunmetal dark:text-gunmetal hover:bg-field-drab dark:hover:bg-field-drab transition-all duration-300 shadow-md font-semibold ${scrolled ? "px-3 py-2 text-sm" : "px-4 py-2.5 text-base"}`}>İletişim</motion.a>
                 </motion.div>
@@ -82,7 +82,7 @@ export default function Navbar() {
 
               <div className="flex items-center gap-3">
                 <button onClick={() => setOpen(true)} aria-label="Açılır menü" className={`p-2 rounded-md md:hidden transition-colors ${scrolled ? "bg-white/10 hover:bg-white/20" : "bg-transparent hover:bg-timberwolf/10"}`}>
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={`${scrolled ? "text-white" : "text-gunmetal dark:text-timberwolf"}`}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-gray-200">
                     <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
@@ -92,43 +92,108 @@ export default function Navbar() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Drawer */}
+      {/* Full Screen Mobile Menu */}
       <AnimatePresence>
         {open && (
-          <div className="fixed inset-0 z-50 flex">
-            <motion.div initial={{ x: -300 }} animate={{ x: 0 }} exit={{ x: -300 }} transition={{ type: 'tween' }}>
-              <div className="w-72 sm:w-80 bg-timberwolf dark:bg-gunmetal-2 p-5 sm:p-6 shadow-xl border-r border-field-drab dark:border-[rgba(215,210,204,0.15)]">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="relative w-9 h-9 rounded-md overflow-hidden bg-timberwolf dark:bg-gunmetal ring-1 ring-field-drab dark:ring-[rgba(218,175,81,0.2)]">
-                      <Image src="/logo.png" alt="Mostar" fill className="object-cover w-full h-full" />
-                      <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[rgba(218,175,81,0.15)] dark:from-[rgba(218,175,81,0.2)] to-transparent" aria-hidden="true" />
-                    </div>
-                    <div className="text-sm font-semibold text-field-drab dark:text-timberwolf">Mostar</div>
-                  </div>
-                  <button onClick={() => setOpen(false)} aria-label="Kapat" className="p-2 rounded-md hover:bg-timberwolf/30 dark:hover:bg-gunmetal transition-colors text-field-drab dark:text-timberwolf">✕</button>
+          <>
+            {/* Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
+              aria-hidden="true"
+            />
+            
+            {/* Full Screen Menu */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-50 flex items-center justify-center"
+            >
+              <div className="relative w-full h-full bg-gunmetal/95 dark:bg-gunmetal-2/95 backdrop-blur-md p-8 flex flex-col">
+                {/* Close Button */}
+                <div className="flex justify-end mb-8">
+                  <button 
+                    onClick={() => setOpen(false)} 
+                    aria-label="Kapat" 
+                    className="p-3 rounded-full hover:bg-white/10 transition-colors text-white"
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
                 </div>
 
-                <nav className="flex flex-col gap-4">
-                  <a onClick={() => setOpen(false)} href="#hizmetler" className="text-gray-300 hover:text-gold-metallic dark:hover:text-gold-metallic transition-colors font-bold">Hizmetler</a>
-                  <a onClick={() => setOpen(false)} href="#projeler" className="text-gray-300 hover:text-gold-metallic dark:hover:text-gold-metallic transition-colors font-bold">Projeler</a>
-                  <a onClick={() => setOpen(false)} href="#referanslar" className="text-gray-300 hover:text-gold-metallic dark:hover:text-gold-metallic transition-colors font-bold">Referanslar</a>
-                  <button onClick={() => { setShowModal(true); setOpen(false); }} className="mt-2 rounded-md bg-gold-metallic dark:bg-gold-metallic text-gunmetal dark:text-gunmetal px-3 py-2 hover:bg-field-drab dark:hover:bg-field-drab transition-colors shadow-md font-semibold">İletişim</button>
+                {/* Logo */}
+                <div className="flex flex-col items-center mb-12">
+                  <div className="relative w-20 h-20 rounded-lg overflow-hidden mb-4">
+                    <Image src="/logo.png" alt="Mostar Madencilik" fill className="object-cover" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white">Mostar Madencilik</h2>
+                </div>
+
+                {/* Navigation Links */}
+                <nav className="flex-1 flex flex-col items-center justify-center gap-8">
+                  <motion.a 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    onClick={() => setOpen(false)} 
+                    href="#hakkımızda" 
+                    className="text-3xl text-gray-200 hover:text-gold-metallic transition-colors font-bold"
+                  >
+                    Hakkımızda
+                  </motion.a>
+                  <motion.a 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    onClick={() => setOpen(false)} 
+                    href="#hizmetler" 
+                    className="text-3xl text-gray-200 hover:text-gold-metallic transition-colors font-bold"
+                  >
+                    Hizmetler
+                  </motion.a>
+                  <motion.a 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    onClick={() => setOpen(false)} 
+                    href="#projeler" 
+                    className="text-3xl text-gray-200 hover:text-gold-metallic transition-colors font-bold"
+                  >
+                    Projeler
+                  </motion.a>
+                  <motion.a
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    onClick={() => setOpen(false)}
+                    href="#iletisim"
+                    className="mt-8 px-8 py-4 rounded-lg bg-gold-metallic text-gunmetal text-xl font-bold hover:bg-field-drab transition-colors shadow-lg"
+                  >
+                    İletişim
+                  </motion.a>
                 </nav>
+
+                {/* Contact Info */}
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                  className="text-center text-gray-400 text-sm"
+                >
+                  <p>+90 (535) 357 25 49</p>
+                  <p className="mt-1">info@mostarmadencilik.com.tr</p>
+                </motion.div>
               </div>
             </motion.div>
-
-            <div className="flex-1">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.4 }}
-                exit={{ opacity: 0 }}
-                aria-hidden="true"
-              >
-                <div onClick={() => setOpen(false)} className="w-full h-full bg-black/60" />
-              </motion.div>
-            </div>
-          </div>
+          </>
         )}
       </AnimatePresence>
 

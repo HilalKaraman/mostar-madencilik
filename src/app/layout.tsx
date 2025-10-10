@@ -34,7 +34,8 @@ export const metadata: Metadata = {
     "kum taşıma",
     "malzeme nakliye",
     "hafriyat firması",
-    "Mostar Madencilik"
+    "Mostar Madencilik",
+    "taşımacılık"
   ],
   authors: [{ name: "Mostar Madencilik" }],
   creator: "Mostar Madencilik",

@@ -183,7 +183,7 @@ export default function Home() {
 
 
       {/* Company Info Section with Paletli Kepçe */}
-      <section aria-label="Şirket Hakkında" className="py-16 sm:py-20 lg:py-24 bg-card">
+      <section id="hakkımızda" aria-label="Şirket Hakkında" className="py-16 sm:py-20 lg:py-24 bg-card">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content */}
@@ -698,7 +698,10 @@ export default function Home() {
               </span>
               <span className="font-semibold">Mostar Madencilik</span>
             </div>
-            <p className="text-sm text-muted-foreground">© 2025 Mostar Madencilik. Tüm hakları saklıdır.</p>
+            <div className="text-sm text-muted-foreground text-center sm:text-right">
+              <p>© 2025 Mostar Madencilik. Tüm hakları saklıdır.</p>
+              <p className="mt-1">Designed By Altıkulaç Yazılım</p>
+            </div>
           </motion.div>
         </div>
       </footer>
