@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://mostarmadencilik.com.tr'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mostarmadencilik.com.tr'),
   alternates: {
     canonical: '/',
   },
@@ -109,7 +109,7 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <head>
-        <link rel="canonical" href={process.env.NEXT_PUBLIC_SITE_URL || 'https://mostarmadencilik.com'} />
+        <link rel="canonical" href={process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mostarmadencilik.com.tr'} />
         <meta name="geo.region" content="TR-48" />
         <meta name="geo.placename" content="Muğla" />
         <meta name="geo.position" content="37.2;27.5" />

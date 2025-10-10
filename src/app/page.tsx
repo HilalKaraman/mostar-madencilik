@@ -39,16 +39,16 @@ export default function Home() {
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://mostarmadencilik.com.tr/#hizmetler",
+        "@id": "https://www.mostarmadencilik.com.tr/#hizmetler",
         "name": "Mostar Madencilik",
-        "url": "https://mostarmadencilik.com.tr",
+        "url": "https://www.mostarmadencilik.com.tr",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://mostarmadencilik.com.tr/logo.png",
+          "url": "https://www.mostarmadencilik.com.tr/logo.png",
           "width": 512,
           "height": 512
         },
-        "image": "https://mostarmadencilik.com.tr/logo.png",
+        "image": "https://www.mostarmadencilik.com.tr/logo.png",
         "description": "Muğla ve çevre illerde 15+ yıllık deneyimle profesyonel hafriyat, kazı, nakliye ve madencilik hizmetleri.",
         "address": {
           "@type": "PostalAddress",
@@ -81,12 +81,12 @@ export default function Home() {
       },
       {
         "@type": "WebSite",
-        "@id": "https://mostarmadencilik.com.tr",
-        "url": "https://mostarmadencilik.com.tr",
+        "@id": "https://www.mostarmadencilik.com.tr",
+        "url": "https://www.mostarmadencilik.com.tr",
         "name": "Mostar Madencilik",
         "description": "Profesyonel hafriyat ve madencilik hizmetleri",
         "publisher": {
-          "@id": "https://mostarmadencilik.com.tr"
+          "@id": "https://www.mostarmadencilik.com.tr"
         },
         "inLanguage": "tr-TR"
       },
@@ -94,7 +94,7 @@ export default function Home() {
         "@type": "Service",
         "serviceType": "Hafriyat ve Kazı Hizmetleri",
         "provider": {
-          "@id": "https://mostarmadencilik.com.tr/#organization"
+          "@id": "https://www.mostarmadencilik.com.tr/#organization"
         },
         "areaServed": {
           "@type": "State",
@@ -133,9 +133,9 @@ export default function Home() {
       },
       {
         "@type": "LocalBusiness",
-        "@id": "https://mostarmadencilik.com.tr/#localbusiness",
+        "@id": "https://www.mostarmadencilik.com.tr/#localbusiness",
         "name": "Mostar Madencilik",
-        "image": "https://mostarmadencilik.com.tr/logo.png",
+        "image": "https://www.mostarmadencilik.com.tr/logo.png",
         "priceRange": "$$",
         "address": {
           "@type": "PostalAddress",
@@ -148,7 +148,7 @@ export default function Home() {
           "latitude": 37.2,
           "longitude": 27.5
         },
-        "url": "https://mostarmadencilik.com.tr",
+        "url": "https://www.mostarmadencilik.com.tr",
         "telephone": "+90-535-357-2549",
         "openingHoursSpecification": {
           "@type": "OpeningHoursSpecification",

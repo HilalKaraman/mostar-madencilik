@@ -4,7 +4,7 @@ Allow: /
 Disallow: /api/
 
 # Sitemap
-Sitemap: https://mostarmadencilik.com.tr/sitemap.xml
+Sitemap: https://www.mostarmadencilik.com.tr/sitemap.xml
 
 # Google Bot
 User-agent: Googlebot
