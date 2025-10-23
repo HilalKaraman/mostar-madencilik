@@ -14,10 +14,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Mostar Madencilik & Hafriyat | Muğla Profesyonel Hafriyat Hizmetleri",
+    default: "Mostar Madencilik & Hafriyat | Bodrum Profesyonel Hafriyat Hizmetleri",
     template: "%s | Mostar Madencilik"
   },
-  description: "Muğla ve çevre illerde 15+ yıllık deneyimle profesyonel hafriyat, kazı, nakliye ve madencilik hizmetleri. Modern ekipman, uzman kadro ve 7/24 hizmet. Ücretsiz keşif ve fiyat teklifi.",
+  description: "Bodrum ve çevre illerde 15+ yıllık deneyimle profesyonel hafriyat, kazı, nakliye ve madencilik hizmetleri. Modern ekipman, uzman kadro ve 7/24 hizmet. Ücretsiz keşif ve fiyat teklifi.",
   keywords: [
     "hafriyat",
     "kazı işleri",
@@ -50,8 +50,8 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: "Mostar Madencilik & Hafriyat | Muğla Profesyonel Hafriyat Hizmetleri",
-    description: "Muğla ve çevre illerde 15+ yıllık deneyimle profesyonel hafriyat, kazı, nakliye ve madencilik hizmetleri. Modern ekipman, uzman kadro ve 7/24 hizmet.",
+    title: "Mostar Madencilik & Hafriyat | Bodrum Profesyonel Hafriyat Hizmetleri",
+    description: "Bodrum ve çevre illerde 15+ yıllık deneyimle profesyonel hafriyat, kazı, nakliye ve madencilik hizmetleri. Modern ekipman, uzman kadro ve 7/24 hizmet.",
     url: '/',
     siteName: 'Mostar Madencilik',
     locale: 'tr_TR',
